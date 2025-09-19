@@ -39,7 +39,7 @@ export default function Dashboard() {
   }, [resumes, applications, attempts]);
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[260px,1fr]">
+    <div className="grid gap-6 lg:grid-cols-[minmax(4rem,16rem),1fr]">
       <DashboardSidebar />
       <div className="space-y-8">
         <section>

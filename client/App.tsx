@@ -30,15 +30,6 @@ function Layout() {
             <Button asChild variant="ghost" className={cn("px-3")}>
               <Link to="/">Home</Link>
             </Button>
-            <Button asChild variant="ghost" className={cn("px-3")}>
-              <Link to="/resume">Resume</Link>
-            </Button>
-            <Button asChild variant="ghost" className={cn("px-3")}>
-              <Link to="/jobs">Jobs</Link>
-            </Button>
-            <Button asChild variant="ghost" className={cn("px-3")}>
-              <Link to="/tests">Tests</Link>
-            </Button>
             <Button asChild className={cn("px-3")}>
               <Link to="/dashboard">Dashboard</Link>
             </Button>

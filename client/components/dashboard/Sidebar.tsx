@@ -1,24 +1,27 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import type { Resume, Application, QuizAttempt } from "@shared/api";
 
-function useLocal<T>(key: string, fallback: T) {
-  const [data, setData] = useState<T>(fallback);
+function useLocalCount<T = unknown>(key: string) {
+  const [count, setCount] = useState(0);
   useEffect(() => {
     try {
       const raw = localStorage.getItem(key);
-      setData(raw ? (JSON.parse(raw) as T) : fallback);
+      const arr = raw ? (JSON.parse(raw) as T[]) : [];
+      setCount(Array.isArray(arr) ? arr.length : 0);
     } catch {
-      setData(fallback);
+      setCount(0);
     }
   }, [key]);
-  return data;
+  return count;
 }
 
 export default function DashboardSidebar() {
-  const resumes = useLocal<Resume[]>("ica.resumes", []);
-  const apps = useLocal<Application[]>("ica.applications", []);
-  const attempts = useLocal<QuizAttempt[]>("ica.quizAttempts", []);
+  const resumeCount = useLocalCount<Resume>("ica.resumes");
+  const appCount = useLocalCount<Application>("ica.applications");
+  const attemptCount = useLocalCount<QuizAttempt>("ica.quizAttempts");
 
   const [collapsed, setCollapsed] = useState<boolean>(() => {
     try {
@@ -32,10 +35,6 @@ export default function DashboardSidebar() {
   }, [collapsed]);
 
   const widthClass = collapsed ? "lg:w-16" : "lg:w-64";
-
-  const resumeItems = useMemo(() => resumes.slice(0, 6), [resumes]);
-  const appItems = useMemo(() => apps.slice(0, 6), [apps]);
-  const attemptItems = useMemo(() => attempts.slice(0, 6), [attempts]);
 
   return (
     <aside
@@ -57,59 +56,33 @@ export default function DashboardSidebar() {
         </button>
       </div>
 
-      <div className="h-[calc(100%-2.75rem)] overflow-auto pr-1">
-        {/* Resumes */}
-        <section className="mb-4">
-          <div className={cn("mb-2 px-2 text-xs font-medium text-muted-foreground", collapsed && "sr-only")}>Resumes</div>
-          <ul className="space-y-2">
-            {resumeItems.map((r) => (
-              <li key={r.id} className="rounded-md border p-2 text-xs">
-                <div className={cn("font-medium", collapsed && "truncate")}>{r.fullName}</div>
-                {!collapsed && (
-                  <div className="text-muted-foreground">{r.role} · {r.location || "Remote"}</div>
-                )}
-              </li>
-            ))}
-            {resumeItems.length === 0 && (
-              <li className={cn("px-2 text-xs text-muted-foreground", collapsed && "sr-only")}>No resumes yet</li>
-            )}
-          </ul>
+      <div className="h-[calc(100%-2.75rem)] space-y-3 overflow-auto pr-1">
+        <section className="rounded-lg border p-3">
+          <div className="text-xs text-muted-foreground">Resumes</div>
+          <div className="mt-1 text-2xl font-bold">{resumeCount}</div>
+          {!collapsed && (
+            <Button asChild size="sm" className="mt-2 w-full">
+              <Link to="/resume">View all</Link>
+            </Button>
+          )}
         </section>
-
-        {/* Applications */}
-        <section className="mb-4">
-          <div className={cn("mb-2 px-2 text-xs font-medium text-muted-foreground", collapsed && "sr-only")}>Applications</div>
-          <ul className="space-y-2">
-            {appItems.map((a) => (
-              <li key={a.id} className="rounded-md border p-2 text-xs">
-                <div className={cn("font-medium", collapsed && "truncate")}>{a.job.title}</div>
-                {!collapsed && (
-                  <div className="text-muted-foreground">{a.job.company} · {a.status}</div>
-                )}
-              </li>
-            ))}
-            {appItems.length === 0 && (
-              <li className={cn("px-2 text-xs text-muted-foreground", collapsed && "sr-only")}>No applications yet</li>
-            )}
-          </ul>
+        <section className="rounded-lg border p-3">
+          <div className="text-xs text-muted-foreground">Applications</div>
+          <div className="mt-1 text-2xl font-bold">{appCount}</div>
+          {!collapsed && (
+            <Button asChild size="sm" className="mt-2 w-full" variant="secondary">
+              <Link to="/jobs">View all</Link>
+            </Button>
+          )}
         </section>
-
-        {/* Tests */}
-        <section>
-          <div className={cn("mb-2 px-2 text-xs font-medium text-muted-foreground", collapsed && "sr-only")}>Tests</div>
-          <ul className="space-y-2">
-            {attemptItems.map((t) => (
-              <li key={t.id} className="rounded-md border p-2 text-xs">
-                <div className={cn("font-medium", collapsed && "truncate")}>{t.role} Quiz</div>
-                {!collapsed && (
-                  <div className="text-muted-foreground">{Math.round((t.score / t.total) * 100)}% · {new Date(t.date).toLocaleDateString()}</div>
-                )}
-              </li>
-            ))}
-            {attemptItems.length === 0 && (
-              <li className={cn("px-2 text-xs text-muted-foreground", collapsed && "sr-only")}>No attempts yet</li>
-            )}
-          </ul>
+        <section className="rounded-lg border p-3">
+          <div className="text-xs text-muted-foreground">Tests</div>
+          <div className="mt-1 text-2xl font-bold">{attemptCount}</div>
+          {!collapsed && (
+            <Button asChild size="sm" className="mt-2 w-full" variant="ghost">
+              <Link to="/tests">View all</Link>
+            </Button>
+          )}
         </section>
       </div>
     </aside>

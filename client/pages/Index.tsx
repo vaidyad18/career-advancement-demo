@@ -1,6 +1,3 @@
-import ResumeBuilder from "@/components/resume/ResumeBuilder";
-import JobBoard from "@/components/jobs/JobBoard";
-import RoleQuiz from "@/components/quiz/RoleQuiz";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -22,20 +19,29 @@ export default function Index() {
             Build ATS-friendly resumes, discover role-matched jobs, and validate skills with tailored quizzes — all in one beautiful dashboard.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="#resume-builder" className="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90">Create Resume</a>
-            <Button asChild variant="secondary"><Link to="/dashboard">Open Dashboard</Link></Button>
+            <Button asChild><Link to="/resume">Create Resume</Link></Button>
+            <Button asChild variant="secondary"><Link to="/jobs">Find Jobs</Link></Button>
+            <Button asChild variant="ghost"><Link to="/tests">Take Test</Link></Button>
+            <Button asChild variant="ghost"><Link to="/dashboard">Open Dashboard</Link></Button>
           </div>
         </div>
         <div className="pointer-events-none absolute -right-16 -top-16 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
       </section>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <ResumeBuilder />
-        <div className="grid gap-6">
-          <JobBoard />
-          <RoleQuiz />
+      <section className="grid gap-6 md:grid-cols-3">
+        <div className="rounded-lg border p-6">
+          <h3 className="text-lg font-semibold">ATS-friendly Resumes</h3>
+          <p className="mt-2 text-sm text-muted-foreground">Clean structure, smart wording, and AI-assisted summaries.</p>
         </div>
-      </div>
+        <div className="rounded-lg border p-6">
+          <h3 className="text-lg font-semibold">Role-matched Jobs</h3>
+          <p className="mt-2 text-sm text-muted-foreground">See jobs aligned to your role, apply in a click.</p>
+        </div>
+        <div className="rounded-lg border p-6">
+          <h3 className="text-lg font-semibold">Quizzes & Insights</h3>
+          <p className="mt-2 text-sm text-muted-foreground">Validate skills with quick quizzes and track progress.</p>
+        </div>
+      </section>
     </div>
   );
 }

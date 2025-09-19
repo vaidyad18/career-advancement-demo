@@ -28,14 +28,17 @@ function Layout() {
               <Link to="/">Home</Link>
             </Button>
             <Button asChild variant="ghost" className={cn("px-3")}>
+              <Link to="/resume">Resume</Link>
+            </Button>
+            <Button asChild variant="ghost" className={cn("px-3")}>
+              <Link to="/jobs">Jobs</Link>
+            </Button>
+            <Button asChild variant="ghost" className={cn("px-3")}>
+              <Link to="/tests">Tests</Link>
+            </Button>
+            <Button asChild className={cn("px-3")}>
               <Link to="/dashboard">Dashboard</Link>
             </Button>
-            <a
-              className="ml-2 hidden rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 md:inline-block"
-              href="#resume-builder"
-            >
-              Build Resume
-            </a>
           </nav>
         </div>
       </header>

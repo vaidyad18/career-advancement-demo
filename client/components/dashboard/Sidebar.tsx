@@ -47,7 +47,17 @@ export default function DashboardSidebar() {
         <div className={cn("text-xs font-semibold uppercase tracking-wide text-muted-foreground", collapsed && "sr-only")}>Snapshot</div>
         <button
           type="button"
-          onClick={() => setCollapsed((v) => !v)}
+          onClick={() =>
+            setCollapsed((v) => {
+              const next = !v;
+              try {
+                window.dispatchEvent(
+                  new CustomEvent("ica:sidebar-collapsed", { detail: next }),
+                );
+              } catch {}
+              return next;
+            })
+          }
           className="inline-flex h-8 w-8 items-center justify-center rounded-md border bg-background text-sm hover:bg-accent"
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           title={collapsed ? "Expand" : "Collapse"}

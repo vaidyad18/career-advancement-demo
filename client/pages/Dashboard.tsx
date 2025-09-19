@@ -38,8 +38,35 @@ export default function Dashboard() {
     return { resumes: resumes.length, applied, tests, avg };
   }, [resumes, applications, attempts]);
 
+  const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(() => {
+    try {
+      return JSON.parse(localStorage.getItem("ica.sidebarCollapsed") || "false");
+    } catch {
+      return false;
+    }
+  });
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === "ica.sidebarCollapsed" && e.newValue) {
+        try {
+          setSidebarCollapsed(JSON.parse(e.newValue));
+        } catch {}
+      }
+    };
+    const onCustom = (e: Event) => {
+      const ce = e as CustomEvent<boolean>;
+      if (typeof ce.detail === "boolean") setSidebarCollapsed(ce.detail);
+    };
+    window.addEventListener("storage", onStorage);
+    window.addEventListener("ica:sidebar-collapsed", onCustom as EventListener);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("ica:sidebar-collapsed", onCustom as EventListener);
+    };
+  }, []);
+
   return (
-    <div className="grid gap-6 lg:grid-cols-[minmax(4rem,16rem),1fr]">
+    <div className={cn("grid gap-6", sidebarCollapsed ? "lg:grid-cols-[4rem,1fr]" : "lg:grid-cols-[16rem,1fr]")}>
       <DashboardSidebar />
       <div className="space-y-8">
         <section>

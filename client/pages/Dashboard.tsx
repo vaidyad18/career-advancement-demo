@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import DashboardSidebar from "@/components/dashboard/Sidebar";
 import DashboardCharts from "@/components/dashboard/Charts";
 import type { Resume, Application, QuizAttempt } from "@shared/api";
+import { cn } from "@/lib/utils";
 
 function useLocalStorageList<T>(key: string, initial: T[]) {
   const [list, setList] = useState<T[]>(() => {

@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 function QuickLauncher() {
   return (
@@ -98,7 +99,32 @@ export default function Index() {
       <section className="rounded-2xl border p-8">
         <h3 className="text-2xl font-bold">FAQs</h3>
         <div className="mt-6">
-          <import-accordion />
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>Is the resume ATS-compatible?</AccordionTrigger>
+              <AccordionContent>
+                Yes. We focus on structure, readability, and keyword clarity for Applicant Tracking Systems.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger>How do you match jobs?</AccordionTrigger>
+              <AccordionContent>
+                We filter openings by your resume role and tags to surface relevant postings.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger>Are quizzes customizable?</AccordionTrigger>
+              <AccordionContent>
+                Quizzes are role-based and concise, designed for quick skill checks and progress tracking.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-4">
+              <AccordionTrigger>How is my data stored?</AccordionTrigger>
+              <AccordionContent>
+                This prototype stores data locally in your browser (localStorage). You can clear it anytime. We can connect a database later if needed.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </section>
 

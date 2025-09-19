@@ -23,7 +23,9 @@ function Layout() {
       <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur">
         <div className="container flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center gap-2 font-bold">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground">IA</span>
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
+              IA
+            </span>
             <span className="text-lg">Intelligent Career Advancement</span>
           </Link>
           <nav className="flex items-center gap-2">
@@ -41,10 +43,17 @@ function Layout() {
       </main>
       <footer className="border-t py-8 text-sm text-muted-foreground">
         <div className="container flex flex-col items-center justify-between gap-4 md:flex-row">
-          <p>© {new Date().getFullYear()} Intelligent Career Advancement Platform</p>
+          <p>
+            © {new Date().getFullYear()} Intelligent Career Advancement
+            Platform
+          </p>
           <div className="flex items-center gap-4">
-            <a href="#" className="hover:text-foreground">Privacy</a>
-            <a href="#" className="hover:text-foreground">Terms</a>
+            <a href="#" className="hover:text-foreground">
+              Privacy
+            </a>
+            <a href="#" className="hover:text-foreground">
+              Terms
+            </a>
           </div>
         </div>
       </footer>

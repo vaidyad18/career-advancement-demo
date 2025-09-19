@@ -24,7 +24,7 @@ export const QUIZZES: Quiz[] = [
       {
         id: "fe-q3",
         prompt: "Which attribute improves image loading performance?",
-        choices: ["alt", "srcset", "loading=\"lazy\"", "title"],
+        choices: ["alt", "srcset", 'loading="lazy"', "title"],
         answerIndex: 2,
       },
     ],

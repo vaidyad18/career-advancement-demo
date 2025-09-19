@@ -77,7 +77,8 @@ export default function ResumeBuilder({ onSaved }: Props) {
           title: expTitle.trim(),
           start: expStart,
           end: expEnd,
-          summary: expSummary || generateExperienceSummary(expTitle, expCompany),
+          summary:
+            expSummary || generateExperienceSummary(expTitle, expCompany),
         },
       ],
     };
@@ -96,67 +97,130 @@ export default function ResumeBuilder({ onSaved }: Props) {
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-2">
             <label className="text-sm font-medium">Full Name</label>
-            <Input value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="e.g., Alex Sharma" />
+            <Input
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              placeholder="e.g., Alex Sharma"
+            />
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium">Email</label>
-            <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@email.com" />
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@email.com"
+            />
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium">Phone</label>
-            <Input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+91 98xxxxxxxx" />
+            <Input
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="+91 98xxxxxxxx"
+            />
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium">Role</label>
-            <Input value={role} onChange={(e) => setRole(e.target.value)} placeholder="Frontend Engineer" />
+            <Input
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              placeholder="Frontend Engineer"
+            />
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium">Location</label>
-            <Input value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Remote / City" />
+            <Input
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="Remote / City"
+            />
           </div>
           <div className="space-y-2">
-            <label className="text-sm font-medium">Skills (comma separated)</label>
-            <Input value={skills} onChange={(e) => setSkills(e.target.value)} placeholder="React, TypeScript, ..." />
+            <label className="text-sm font-medium">
+              Skills (comma separated)
+            </label>
+            <Input
+              value={skills}
+              onChange={(e) => setSkills(e.target.value)}
+              placeholder="React, TypeScript, ..."
+            />
           </div>
         </div>
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <label className="text-sm font-medium">Professional Summary</label>
-            <Button type="button" variant="secondary" onClick={() => setSummary(generateSummary(role, skills.split(",")))}>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() =>
+                setSummary(generateSummary(role, skills.split(",")))
+              }
+            >
               Generate with AI
             </Button>
           </div>
-          <Textarea rows={4} value={summary} onChange={(e) => setSummary(e.target.value)} />
+          <Textarea
+            rows={4}
+            value={summary}
+            onChange={(e) => setSummary(e.target.value)}
+          />
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-2">
             <label className="text-sm font-medium">Company</label>
-            <Input value={expCompany} onChange={(e) => setExpCompany(e.target.value)} />
+            <Input
+              value={expCompany}
+              onChange={(e) => setExpCompany(e.target.value)}
+            />
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium">Title</label>
-            <Input value={expTitle} onChange={(e) => setExpTitle(e.target.value)} />
+            <Input
+              value={expTitle}
+              onChange={(e) => setExpTitle(e.target.value)}
+            />
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium">Start</label>
-            <Input type="month" value={expStart} onChange={(e) => setExpStart(e.target.value)} />
+            <Input
+              type="month"
+              value={expStart}
+              onChange={(e) => setExpStart(e.target.value)}
+            />
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium">End</label>
-            <Input value={expEnd} onChange={(e) => setExpEnd(e.target.value)} placeholder="YYYY-MM or Present" />
+            <Input
+              value={expEnd}
+              onChange={(e) => setExpEnd(e.target.value)}
+              placeholder="YYYY-MM or Present"
+            />
           </div>
         </div>
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <label className="text-sm font-medium">Experience Summary</label>
-            <Button type="button" variant="secondary" onClick={() => setExpSummary(generateExperienceSummary(expTitle, expCompany))}>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() =>
+                setExpSummary(generateExperienceSummary(expTitle, expCompany))
+              }
+            >
               Generate with AI
             </Button>
           </div>
-          <Textarea rows={3} value={expSummary} onChange={(e) => setExpSummary(e.target.value)} />
+          <Textarea
+            rows={3}
+            value={expSummary}
+            onChange={(e) => setExpSummary(e.target.value)}
+          />
         </div>
         <div className="flex justify-end">
-          <Button disabled={!valid} onClick={save}>Save Resume</Button>
+          <Button disabled={!valid} onClick={save}>
+            Save Resume
+          </Button>
         </div>
       </CardContent>
     </Card>

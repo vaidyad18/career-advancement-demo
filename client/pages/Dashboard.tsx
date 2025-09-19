@@ -24,7 +24,10 @@ function useLocalStorageList<T>(key: string, initial: T[]) {
 
 export default function Dashboard() {
   const [resumes] = useLocalStorageList<Resume>("ica.resumes", []);
-  const [applications] = useLocalStorageList<Application>("ica.applications", []);
+  const [applications] = useLocalStorageList<Application>(
+    "ica.applications",
+    [],
+  );
   const [attempts] = useLocalStorageList<QuizAttempt>("ica.quizAttempts", []);
 
   const stats = useMemo(() => {
@@ -32,8 +35,10 @@ export default function Dashboard() {
     const tests = attempts.length;
     const avg = attempts.length
       ? Math.round(
-          attempts.reduce((a, b) => a + Math.round((b.score / b.total) * 100), 0) /
-            attempts.length,
+          attempts.reduce(
+            (a, b) => a + Math.round((b.score / b.total) * 100),
+            0,
+          ) / attempts.length,
         )
       : 0;
     return { resumes: resumes.length, applied, tests, avg };
@@ -41,7 +46,9 @@ export default function Dashboard() {
 
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(() => {
     try {
-      return JSON.parse(localStorage.getItem("ica.sidebarCollapsed") || "false");
+      return JSON.parse(
+        localStorage.getItem("ica.sidebarCollapsed") || "false",
+      );
     } catch {
       return false;
     }
@@ -62,16 +69,28 @@ export default function Dashboard() {
     window.addEventListener("ica:sidebar-collapsed", onCustom as EventListener);
     return () => {
       window.removeEventListener("storage", onStorage);
-      window.removeEventListener("ica:sidebar-collapsed", onCustom as EventListener);
+      window.removeEventListener(
+        "ica:sidebar-collapsed",
+        onCustom as EventListener,
+      );
     };
   }, []);
 
   return (
-    <div className={cn("grid gap-6", sidebarCollapsed ? "lg:grid-cols-[4rem,1fr]" : "lg:grid-cols-[16rem,1fr]")}>
+    <div
+      className={cn(
+        "grid gap-6",
+        sidebarCollapsed
+          ? "lg:grid-cols-[4rem,1fr]"
+          : "lg:grid-cols-[16rem,1fr]",
+      )}
+    >
       <DashboardSidebar />
       <div className="space-y-8">
         <section>
-          <h1 className="bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-3xl font-extrabold tracking-tight text-transparent">Overview</h1>
+          <h1 className="bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-3xl font-extrabold tracking-tight text-transparent">
+            Overview
+          </h1>
           <p className="mt-2 text-muted-foreground">
             Track resumes, job applications, and quiz performance at a glance.
           </p>
@@ -132,7 +151,9 @@ export default function Dashboard() {
                     </div>
                     <div className="flex items-center gap-2">
                       <Badge>{r.role}</Badge>
-                      <Badge variant="secondary">{r.location || "Remote"}</Badge>
+                      <Badge variant="secondary">
+                        {r.location || "Remote"}
+                      </Badge>
                     </div>
                   </div>
                 </div>
@@ -153,7 +174,9 @@ export default function Dashboard() {
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <div>
                       <p className="font-medium">{a.job.title}</p>
-                      <p className="text-sm text-muted-foreground">{a.job.company} · {a.job.location}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {a.job.company} · {a.job.location}
+                      </p>
                     </div>
                     <Badge variant="secondary">{a.status}</Badge>
                   </div>

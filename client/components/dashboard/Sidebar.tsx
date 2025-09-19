@@ -25,7 +25,9 @@ export default function DashboardSidebar() {
 
   const [collapsed, setCollapsed] = useState<boolean>(() => {
     try {
-      return JSON.parse(localStorage.getItem("ica.sidebarCollapsed") || "false");
+      return JSON.parse(
+        localStorage.getItem("ica.sidebarCollapsed") || "false",
+      );
     } catch {
       return false;
     }
@@ -44,7 +46,14 @@ export default function DashboardSidebar() {
       )}
     >
       <div className="mb-3 flex items-center justify-between gap-2 px-1">
-        <div className={cn("text-xs font-semibold uppercase tracking-wide text-muted-foreground", collapsed && "sr-only")}>Snapshot</div>
+        <div
+          className={cn(
+            "text-xs font-semibold uppercase tracking-wide text-muted-foreground",
+            collapsed && "sr-only",
+          )}
+        >
+          Snapshot
+        </div>
         <button
           type="button"
           onClick={() =>
@@ -80,7 +89,12 @@ export default function DashboardSidebar() {
           <div className="text-xs text-muted-foreground">Applications</div>
           <div className="mt-1 text-2xl font-bold">{appCount}</div>
           {!collapsed && (
-            <Button asChild size="sm" className="mt-2 w-full" variant="secondary">
+            <Button
+              asChild
+              size="sm"
+              className="mt-2 w-full"
+              variant="secondary"
+            >
               <Link to="/jobs">View all</Link>
             </Button>
           )}

@@ -45,7 +45,10 @@ export default function DashboardCharts() {
   const appsByStatus = useMemo(() => {
     const map = new Map<string, number>();
     apps.forEach((a) => map.set(a.status, (map.get(a.status) || 0) + 1));
-    return Array.from(map.entries()).map(([status, count]) => ({ status, count }));
+    return Array.from(map.entries()).map(([status, count]) => ({
+      status,
+      count,
+    }));
   }, [apps]);
 
   const roleSplit = useMemo(() => {
@@ -67,7 +70,13 @@ export default function DashboardCharts() {
               <XAxis dataKey="date" />
               <YAxis domain={[0, 100]} tickCount={6} />
               <Tooltip />
-              <Line type="monotone" dataKey="score" stroke="#6E59F4" strokeWidth={2} dot={false} />
+              <Line
+                type="monotone"
+                dataKey="score"
+                stroke="#6E59F4"
+                strokeWidth={2}
+                dot={false}
+              />
             </LineChart>
           </ResponsiveContainer>
         </CardContent>

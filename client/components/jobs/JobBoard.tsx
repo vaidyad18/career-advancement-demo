@@ -74,7 +74,9 @@ export default function JobBoard({ activeRole }: Props) {
                 </p>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {j.tags.map((t) => (
-                    <Badge key={t} variant="secondary">{t}</Badge>
+                    <Badge key={t} variant="secondary">
+                      {t}
+                    </Badge>
                   ))}
                 </div>
               </div>

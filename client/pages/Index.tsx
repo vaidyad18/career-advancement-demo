@@ -97,23 +97,8 @@ export default function Index() {
 
       <section className="rounded-2xl border p-8">
         <h3 className="text-2xl font-bold">FAQs</h3>
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
-          <div>
-            <p className="font-medium">Is the resume ATS-compatible?</p>
-            <p className="text-sm text-muted-foreground">Yes. We focus on structure, readability, and keyword clarity.</p>
-          </div>
-          <div>
-            <p className="font-medium">How do you match jobs?</p>
-            <p className="text-sm text-muted-foreground">We filter job listings by your resume’s role and tags.</p>
-          </div>
-          <div>
-            <p className="font-medium">Are quizzes customizable?</p>
-            <p className="text-sm text-muted-foreground">They are role-based and designed to be concise and practical.</p>
-          </div>
-          <div>
-            <p className="font-medium">Where is my data stored?</p>
-            <p className="text-sm text-muted-foreground">In this prototype, data is stored locally in your browser.</p>
-          </div>
+        <div className="mt-6">
+          <import-accordion />
         </div>
       </section>
 

@@ -9,6 +9,9 @@ import { BrowserRouter, Routes, Route, Link, Outlet } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard";
+import Resume from "./pages/Resume";
+import Jobs from "./pages/Jobs";
+import Tests from "./pages/Tests";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
